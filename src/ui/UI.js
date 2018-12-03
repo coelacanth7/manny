@@ -1,53 +1,50 @@
 import React, { Component } from "react";
 import ReactSwipe from "react-swipe";
 
-const imageStyles = {
-	margin: "0 auto",
-	width: "100%",
-	height: "400px"
-};
+import Home from "./Home";
+import About from "./About";
+import Gigs from "./Gigs";
+import Links from "./Links";
+import Art from "./Art";
 
 // generate slide panes
-const numberOfSlides = 20;
+const numberOfSlides = 5;
 let currentSlide;
+const nodes = [
+	<Home className="item" key={0} />,
+	<About className="item" key={1} />,
+	<Gigs className="item" key={2} />,
+	<Art className="item" key={2} />,
+	<Links className="item" key={3} />
+];
 const paneNodes = Array.apply(null, Array(numberOfSlides)).map((_, i) => {
-  currentSlide = i;
+	currentSlide = i;
 	return (
 		<div key={i}>
-			<div className="item">
-				<img
-					style={imageStyles}
-					alt={`slide${i}`}
-					src={`https://placehold.it/400x400/ffffff/c0392b/&text=slide${i}`}
-				/>
-			</div>
+			<div className="item">{nodes[i]}</div>
 		</div>
 	);
 });
 
 // change Swipe.js options by query params
-const startSlide = 0;
+// const startSlide = 0;
 const swipeOptions = {
-	startSlide: startSlide < paneNodes.length && startSlide >= 0 ? startSlide : 0,
-	auto: 1000,
-	speed: 1000,
-	disableScroll: true,
-	continuous: true,
-	callback() {
+	callback: function callback() {
 		console.log("slide changed");
 	},
-	transitionEnd() {
+	transitionEnd: function transitionEnd() {
 		console.log("ended transition");
 	}
 };
 
 class UI extends Component {
-  constructor(props) {
-    super(props)
+	constructor(props) {
+		super(props);
 
-    this.next = this.next.bind(this)
-    this.prev = this.prev.bind(this)
-  }
+		this.next = this.next.bind(this);
+		this.prev = this.prev.bind(this);
+		this.onClickNode = this.onClickNode.bind(this);
+	}
 
 	next() {
 		this.reactSwipe.next();
@@ -57,11 +54,14 @@ class UI extends Component {
 		this.reactSwipe.prev();
 	}
 
+	onClickNode(num) {
+		this.reactSwipe.slide(num);
+	}
+
 	render() {
 		return (
 			<div className="center">
-				<h1 style={{ textAlign: "center" }}>ReactSwipe.js Playground {currentSlide}</h1>
-
+				{/* <button onClick={() => this.onClickNode(2)}>2</button> */}
 				<ReactSwipe
 					ref={reactSwipe => (this.reactSwipe = reactSwipe)}
 					className="mySwipe"
