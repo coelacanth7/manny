@@ -14,7 +14,7 @@ class Player extends Component {
 			<div>
 				<ReactAudioPlayer
 					src={mix1}
-					autoPlay
+					// autoPlay
 					controls
 					ref={el => {
 						console.log(el);
