@@ -7,27 +7,7 @@ import Gigs from "./Gigs";
 import Links from "./Links";
 import Art from "./Art";
 
-// generate slide panes
-const numberOfSlides = 5;
-let currentSlide;
-const nodes = [
-	<Home className="item" key={0} />,
-	<About className="item" key={1} />,
-	<Gigs className="item" key={2} />,
-	<Art className="item" key={2} />,
-	<Links className="item" key={3} />
-];
-const paneNodes = Array.apply(null, Array(numberOfSlides)).map((_, i) => {
-	currentSlide = i;
-	return (
-		<div key={i}>
-			<div className="item">{nodes[i]}</div>
-		</div>
-	);
-});
-
 // change Swipe.js options by query params
-// const startSlide = 0;
 const swipeOptions = {
 	callback: function callback() {
 		console.log("slide changed");
@@ -44,6 +24,7 @@ class UI extends Component {
 		this.next = this.next.bind(this);
 		this.prev = this.prev.bind(this);
 		this.onClickNode = this.onClickNode.bind(this);
+		this.renderPaneNodes = this.renderPaneNodes.bind(this);
 	}
 
 	next() {
@@ -58,6 +39,22 @@ class UI extends Component {
 		this.reactSwipe.slide(num);
 	}
 
+	renderPaneNodes() {
+		return this.nodes.map((node, i) => (
+			<div key={i}>
+				<div className="item">{node}</div>
+			</div>
+		));
+	}
+
+  nodes = [
+  	<Home />,
+  	<About />,
+  	<Gigs />,
+  	<Art />,
+  	<Links />
+  ];
+
 	render() {
 		return (
 			<div className="center">
@@ -67,7 +64,7 @@ class UI extends Component {
 					className="mySwipe"
 					swipeOptions={swipeOptions}
 				>
-					{paneNodes}
+          {this.renderPaneNodes()}
 				</ReactSwipe>
 
 				<div style={{ textAlign: "center" }}>
