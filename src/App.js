@@ -10,7 +10,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<header className="App-header">
-					<h1>sunsets</h1>
+					<h1>sunsets_</h1>
 				</header>
 				<UI />
 				{/* <Canvas /> */}

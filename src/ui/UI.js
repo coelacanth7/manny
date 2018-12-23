@@ -54,8 +54,12 @@ class UI extends Component {
 		return (
 			<div>
 				{headNodes.map((node, i) => (
-					<span key={node} onClick={() => this.onClickNode(i)}>
-						<span className={isSelected(i) ? "selected-header-node" : ''}>
+					<span
+						key={node}
+						onClick={() => this.onClickNode(i)}
+						className="header-node"
+					>
+						<span className={isSelected(i) ? "selected-header-node" : ""}>
 							{node}
 						</span>
 						<span> / </span>

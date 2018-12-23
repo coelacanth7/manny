@@ -1,12 +1,20 @@
 body {
 	background-color: #121212;
 	color: #fff;
+	padding: 12px;
+}
+
+.App-header {
+	font-size: 28px
 }
 
 .pane {
 	margin: "0 auto";
 	width: "100%";
 	height: "400px";
+}
+.pane h3 {
+	font-size: 28px;
 }
 
 .xt-space {
@@ -15,5 +23,9 @@ body {
 
 .selected-header-node {
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 24px;
+}
+
+.header-node {
+	font-size: 18px;
 }
