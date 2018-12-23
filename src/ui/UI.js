@@ -14,18 +14,8 @@ class UI extends Component {
 			pos: 0
 		};
 
-		this.next = this.next.bind(this);
-		this.prev = this.prev.bind(this);
 		this.onClickNode = this.onClickNode.bind(this);
 		this.renderPaneNodes = this.renderPaneNodes.bind(this);
-	}
-
-	next() {
-		this.reactSwipe.next();
-	}
-
-	prev() {
-		this.reactSwipe.prev();
 	}
 
 	onClickNode(num) {
@@ -41,28 +31,36 @@ class UI extends Component {
 		));
 	}
 
+	renderHomeNodes() {
+		const nodes = ["ABOUT", "GIGS", "LINKS", "ART"];
+		return nodes.map((node, i) => (
+			<h3 key={node} onClick={() => this.onClickNode(i + 1)}>
+				{node}
+			</h3>
+		));
+	}
+
 	nodes = [
-		<div className="pane">
-			<h3 onClick={() => this.onClickNode(1)}>ABOUT</h3>
-			<h3 onClick={() => this.onClickNode(2)}>GIGS</h3>
-			<h3 onClick={() => this.onClickNode(3)}>LINKS</h3>
-			<h3 onClick={() => this.onClickNode(4)}>ART</h3>
-		</div>,
+		<div className="pane">{this.renderHomeNodes()}</div>,
 		<About />,
 		<Gigs />,
 		<Links />,
 		<Art />
 	];
 
-	header = (
-		<div>
-			<span onClick={() => this.onClickNode(0)}>HOME / </span>
-			<span onClick={() => this.onClickNode(1)}>ABOUT / </span>
-			<span onClick={() => this.onClickNode(2)}>GIGS / </span>
-			<span onClick={() => this.onClickNode(3)}>LINKS / </span>
-			<span onClick={() => this.onClickNode(4)}>ART / </span>
-		</div>
-	);
+	renderHeader() {
+		const headNodes = ["HOME / ", "ABOUT / ", "GIGS / ", "LINKS / ", "ART / "];
+
+		return (
+			<div>
+				{headNodes.map((node, i) => (
+					<span key={node} onClick={() => this.onClickNode(i)}>
+						{node}
+					</span>
+				))}
+			</div>
+		);
+	}
 
 	// change Swipe.js options by query params
 	swipeOptions = {
@@ -78,7 +76,12 @@ class UI extends Component {
 	render() {
 		return (
 			<div className="center">
-				{this.state.pos !== 0 ? this.header : <div className="xt-space" />}
+				{/* {this.state.pos !== 0 ? this.header : <div className="xt-space" />} */}
+				{this.state.pos !== 0 ? (
+					this.renderHeader()
+				) : (
+					<div className="xt-space" />
+				)}
 				<ReactSwipe
 					ref={reactSwipe => (this.reactSwipe = reactSwipe)}
 					className="mySwipe"
