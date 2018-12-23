@@ -49,13 +49,16 @@ class UI extends Component {
 	];
 
 	renderHeader() {
-		const headNodes = ["HOME / ", "ABOUT / ", "GIGS / ", "LINKS / ", "ART / "];
-
+		const headNodes = ["HOME", "ABOUT", "GIGS", "LINKS", "ART"];
+		const isSelected = i => this.reactSwipe.swipe.getPos() === i;
 		return (
 			<div>
 				{headNodes.map((node, i) => (
 					<span key={node} onClick={() => this.onClickNode(i)}>
-						{node}
+						<span className={isSelected(i) ? "selected-header-node" : ""}>
+							{node}
+						</span>
+						<span> / </span>
 					</span>
 				))}
 			</div>

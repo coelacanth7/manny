@@ -8,3 +8,8 @@
 .xt-space {
 	height: 18px;
 }
+
+.selected-header-node {
+	font-weight: bold;
+	font-size: 20px;
+}
